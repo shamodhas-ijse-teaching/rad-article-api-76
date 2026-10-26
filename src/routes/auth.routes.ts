@@ -4,7 +4,7 @@ import {
   getRefreshToken,
   login,
   register
-} from "./../controllers/auth.controller"
+} from "../controllers/auth.controller"
 import { authenticate } from "../middleware/auth"
 import { requireRole } from "../middleware/role"
 import { UserRole } from "../models/user.model"
@@ -19,22 +19,22 @@ router.post("/refresh", getRefreshToken)
 router.get("/me", authenticate, getMyDetails)
 
 // ADMIN
-router.get("/admin", authenticate, requireRole([UserRole.ADMIN]), () => {})
+// router.get("/admin", authenticate, requireRole([UserRole.ADMIN]), () => {})
 
-// ADMIN, MANAGER
-router.get(
-  "/admin-manager",
-  authenticate,
-  requireRole([UserRole.ADMIN, UserRole.MANAGER]),
-  () => {}
-)
+// // ADMIN, MANAGER
+// router.get(
+//   "/admin-manager",
+//   authenticate,
+//   requireRole([UserRole.ADMIN, UserRole.MANAGER]),
+//   () => {}
+// )
 
-// MANAGER
-router.get(
-  "/admin-manager",
-  authenticate,
-  requireRole([UserRole.MANAGER]),
-  () => {}
-)
+// // MANAGER
+// router.get(
+//   "/admin-manager",
+//   authenticate,
+//   requireRole([UserRole.MANAGER]),
+//   () => {}
+// )
 
 export default router

@@ -1,9 +1,11 @@
 import express, { type Request, type Response } from "express"
-import AuthRouter from "./routes/auth.routers"
 import mongoose from "mongoose"
 import cors from "cors"
 import dotenv from "dotenv"
 dotenv.config()
+
+import AuthRouter from "./routes/auth.routes"
+import AricleRouter from "./routes/article.routes"
 
 const MONGO_URL = process.env.MONGO_LOCAL_URL || ""
 const PORT = process.env.PORT || 3000
@@ -14,6 +16,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/api/v1/auth", AuthRouter)
+app.use("/api/v1/article", AricleRouter)
 
 mongoose
   .connect(MONGO_URL)
