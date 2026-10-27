@@ -18,6 +18,10 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.get("/", (req,res)=>{
+res.send("Done...👌")
+})
+
 app.use("/api/v1/auth", AuthRouter)
 app.use("/api/v1/article", AricleRouter)
 
