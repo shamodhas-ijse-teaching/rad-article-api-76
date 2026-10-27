@@ -3,6 +3,7 @@ import { AuthRequest } from "../middleware/auth"
 import { UserModel } from "../models/user.model"
 import { uploadImage } from "../service/upload.service"
 import { Article } from "../models/article.model"
+import { genrateArticleDescription } from "../service/ai.service"
 
 export const createArticle = async (req: AuthRequest, res: Response) => {
   // req.file
@@ -62,6 +63,19 @@ export const getAllArticle = async (req: Request, res: Response) => {
       meta: { total, page, limit, totalPage: Math.ceil(total / limit) }
     })
   } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" })
+  }
+}
+
+export const getGeneratedDescription = async (req: Request, res: Response) => {
+  const { text } = req.body
+  try {
+    const generatedContent = await genrateArticleDescription(text)
+    res.status(200).json({
+      data: generatedContent
+    })
+  } catch (error) {
+    console.error(error)
     res.status(500).json({ error: "Internal Server Error" })
   }
 }

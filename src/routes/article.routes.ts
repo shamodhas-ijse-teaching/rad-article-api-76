@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createArticle, getAllArticle } from "../controllers/article.controller"
+import { createArticle, getAllArticle, getGeneratedDescription } from "../controllers/article.controller"
 import { authenticate } from "../middleware/auth"
 import { requireRole } from "../middleware/role"
 import { UserRole } from "../models/user.model"
@@ -17,5 +17,7 @@ router.post(
 )
 
 router.get("/", getAllArticle)
+// http://localhost:3000/api/v1/article/ai -> {"text":"react"}
+router.post("/ai", getGeneratedDescription)
 
 export default router
